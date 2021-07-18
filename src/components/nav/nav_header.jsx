@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React  from 'react';
+import { memo } from 'react';
 import styles from "./nav_header.module.css"
 
-const NavHeader = (props) => {
+const NavHeader = memo((props) => {
 
   const searchRef = React.createRef()
 
   const onFetch = () => {
-    props.onGrid()
     props.fetch(searchRef.current.value)
     searchRef.current.value = ""
   }
@@ -29,9 +29,10 @@ return(
     </div>
     <input ref = {searchRef} type="text" className={styles.input} placeholder = "search..." onKeyPress={onKeyPress}/>
     <button className={styles.button} onClick = {onSearch}>
-      <img src= "./search.png" className={styles.buttonImg}/>
+      <img src= "./search.png" alt = "" className={styles.buttonImg}/>
     </button>
 </div>
 )}
+)
 
 export default NavHeader;

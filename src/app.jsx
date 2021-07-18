@@ -15,13 +15,6 @@ function App() {
     setdetailVideo(detail)
   }
 
-  const onGrid = () => {
-    if (display === "list"){
-      setdetailVideo(null)
-      display = "grid"
-    }
-  }
-
   const onFetch = (query) => {
     const requestOptions = {
       method: 'GET',
@@ -32,7 +25,8 @@ function App() {
       .then(response => response.json())
       .then(result => result.items.map(item => ({...item, id: item.id.videoId})))
       .then(items => setVideos(items))
-      .catch(error => console.log('error', error));
+      .catch(error => console.log('error', error))
+      setdetailVideo(null)
   }
 
   useEffect(() => {
@@ -51,7 +45,7 @@ function App() {
 
   return (
     <>
-    <NavHeader fetch = {onFetch} onGrid = {onGrid}/>
+    <NavHeader fetch = {onFetch}/>
     <div className = {styles.content}>
     {detailVideo && <div className = {styles.detail}>
         {<VideoDetail video = {detailVideo}/>}
